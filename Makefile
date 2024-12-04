@@ -1,16 +1,14 @@
-run:
-	@docker compose up -d db
-	@echo "Waiting for PostgreSQL to be ready..."
-	@until docker exec -it $(shell docker compose ps -q db) pg_isready -U dev_user -d dev_db >/dev/null 2>&1; do \
-		echo "Waiting for the database..."; \
-		sleep 1; \
-	done
-	@echo "Database is ready!"
-	@echo "Running Go application..."
-	go run .
+run:	
+	@go run .
 
 init:
-	go mod tidy
+	@echo "Installing dependencies"
+	@go mod tidy
+	@sleep 1
+	@echo "Running docker compose"
+	@docker compose up -d db
 
-stop-db:
-	docker compose down
+clean:
+	@docker compose down
+	@sleep 1
+	@echo "Removed postgres container"
