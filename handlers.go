@@ -71,7 +71,7 @@ func (c *config) handleGetReceiptsPoints(w http.ResponseWriter, r *http.Request)
 		w.WriteHeader(http.StatusNotFound)
 		w.Write([]byte(notFoundResponse))
 	}
-	fmt.Println(receipt)
+
 	res := struct {
 		Points int `json:"points"`
 	}{

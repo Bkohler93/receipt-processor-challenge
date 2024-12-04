@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"database/sql"
-	"fmt"
 
 	"github.com/bkohler93/receipt-processor-challenge/db"
 	"github.com/google/uuid"
@@ -19,7 +18,6 @@ func newStore(database *sql.DB) store {
 }
 
 func (s *store) AddReceipt(r receipt) (db.Receipt, error) {
-	fmt.Println(r)
 	return s.CreateReceipt(context.Background(), db.CreateReceiptParams{
 		Retailer:     r.Retailer,
 		PurchaseDate: r.PurchaseDate,
@@ -34,7 +32,6 @@ func (s *store) GetReceipt(uuid uuid.UUID) (receipt, error) {
 
 	// if extending this application items should be retrieved from the database that have matching receipt id
 
-	fmt.Println(dr)
 	if err != nil {
 		return receipt{}, err
 	}
