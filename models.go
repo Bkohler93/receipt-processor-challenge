@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"regexp"
+	"strings"
 	"time"
 
 	"github.com/bkohler93/receipt-processor-challenge/db"
@@ -80,7 +81,7 @@ func (rr receiptRequest) validateReceipt() (receipt, error) {
 	}
 
 	if isInvalid {
-		return r, fmt.Errorf("invalid receipt request. Invalid fields: %v", invalidFields)
+		return r, fmt.Errorf("invalid receipt request. Invalid fields: %v", strings.Join(invalidFields, ", "))
 	} else {
 		r.Items = items
 		r.PurchaseDate = purchaseDate
@@ -113,7 +114,7 @@ func (ir itemRequest) toItem(itemNum int) (item, error) {
 	}
 
 	if isInvalid {
-		return i, fmt.Errorf("item %d - %v", itemNum, invalidFields)
+		return i, fmt.Errorf("item %d (%v)", itemNum, invalidFields)
 	} else {
 		i.Price = ir.Price
 		i.ShortDescription = ir.ShortDescription
