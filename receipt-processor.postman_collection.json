@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "1a04d43d-7ffa-492c-bd3d-1a0f194780d3",
+		"name": "receipt-processor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "15718950"
+	},
+	"item": [
+		{
+			"name": "POST receipts/process",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"receiptId\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"retailer\": \"Walgreens\",\n    \"purchaseDate\": \"2022-01-02\",\n    \"purchaseTime\": \"08:13\",\n    \"total\": \"2.65\",\n    \"items\": [\n        {\n            \"shortDescription\": \"Pepsi - 12-oz\",\n            \"price\": \"1.25\"\n        },\n        {\n            \"shortDescription\": \"Dasani\",\n            \"price\": \"1.40\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/receipts/process"
+			},
+			"response": []
+		},
+		{
+			"name": "POST receipts/process Target",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"receiptId\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"retailer\": \"Target\",\n    \"purchaseDate\": \"2022-01-01\",\n    \"purchaseTime\": \"13:01\",\n    \"items\": [\n        {\n            \"shortDescription\": \"Mountain Dew 12PK\",\n            \"price\": \"6.49\"\n        },\n        {\n            \"shortDescription\": \"Emils Cheese Pizza\",\n            \"price\": \"12.25\"\n        },\n        {\n            \"shortDescription\": \"Knorr Creamy Chicken\",\n            \"price\": \"1.26\"\n        },\n        {\n            \"shortDescription\": \"Doritos Nacho Cheese\",\n            \"price\": \"3.35\"\n        },\n        {\n            \"shortDescription\": \"   Klarbrunn 12-PK 12 FL OZ  \",\n            \"price\": \"12.00\"\n        }\n    ],\n    \"total\": \"35.35\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/receipts/process"
+			},
+			"response": []
+		},
+		{
+			"name": "POST receipts/process M&M Corner Market",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"receiptId\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"retailer\": \"M&M Corner Market\",\n  \"purchaseDate\": \"2022-03-20\",\n  \"purchaseTime\": \"14:33\",\n  \"items\": [\n    {\n      \"shortDescription\": \"Gatorade\",\n      \"price\": \"2.25\"\n    },{\n      \"shortDescription\": \"Gatorade\",\n      \"price\": \"2.25\"\n    },{\n      \"shortDescription\": \"Gatorade\",\n      \"price\": \"2.25\"\n    },{\n      \"shortDescription\": \"Gatorade\",\n      \"price\": \"2.25\"\n    }\n  ],\n  \"total\": \"9.00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/receipts/process"
+			},
+			"response": []
+		},
+		{
+			"name": "POST receipts/process BadRequest",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"retailer\": \"Walgreens\",\n    \"purchaseTime\": \"08:13\",\n    \"total\": \"2.65\",\n    \"items\": [\n        {\"shortDescription\": \"Pepsi - 12-oz\", \"price\": \"1.25\"},\n        {\"shortDescription\": \"Dasani\", \"price\": \"1.40\"}\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/receipts/process"
+			},
+			"response": []
+		},
+		{
+			"name": "POST receipts/process 415",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/receipts/process"
+			},
+			"response": []
+		},
+		{
+			"name": "GET receipts/id/points",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/receipts/{{receiptId}}/points"
+			},
+			"response": []
+		}
+	]
+}
