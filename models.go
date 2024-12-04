@@ -66,6 +66,7 @@ func (rr receiptRequest) validateReceipt() (receipt, error) {
 	trx := regexp.MustCompile(totalPattern)
 	if !trx.MatchString(rr.Total) {
 		invalidFields = append(invalidFields, "total")
+		isInvalid = true
 	}
 
 	items := []item{}
