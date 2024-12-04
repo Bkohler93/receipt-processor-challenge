@@ -130,7 +130,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"retailer\": \"Walgreens\",\n    \"purchaseTime\": \"08:13\",\n    \"total\": \"2.65\",\n    \"items\": [\n        {\"shortDescription\": \"Pepsi - 12-oz\", \"price\": \"1.25\"},\n        {\"shortDescription\": \"Dasani\", \"price\": \"1.40\"}\n    ]\n}",
+					"raw": "{\n    \"retailer\": \"Walgreens\",\n    \"purchaseTime\": \"08:13\",\n    \"total\": \"2.65\",\n    \"items\": [\n        {\"shortDescription\": \"Pepsi - 12-oz\", \"pri\": \"1.25\"},\n        {\"shortDescription\": \"Dasani\", \"price\": \"1.40\"}\n    ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -172,6 +172,15 @@
 				"method": "GET",
 				"header": [],
 				"url": "localhost:8080/receipts/{{receiptId}}/points"
+			},
+			"response": []
+		},
+		{
+			"name": "GET receipts/id/points 404",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/receipts/abc-123/points"
 			},
 			"response": []
 		}
