@@ -3,14 +3,11 @@ package main
 import (
 	"fmt"
 	"math"
-	"regexp"
 	"strconv"
 	"strings"
 	"time"
 	"unicode"
 )
-
-const pricePattern = `^\d+\.\d{2}$`
 
 func alphanumericCountPoints(s string) int {
 	points := 0
@@ -25,9 +22,7 @@ func alphanumericCountPoints(s string) int {
 // total must be formatted like `99.25` representing a dollar amount
 // with variable number of values before the decimal and two values after
 func mustNoCentsPoints(total string) int {
-	prx := regexp.MustCompile(pricePattern)
-
-	if !prx.MatchString(total) {
+	if !prx.MatchString(total) { // prx compiled in `models.go`
 		panic(fmt.Errorf("mustNoCentsPoints requires a value formatted as money"))
 	}
 
@@ -41,9 +36,7 @@ func mustNoCentsPoints(total string) int {
 // total must be formatted like `99.25` representing a dollar amount
 // with variable number of values before the decimal and two values after
 func mustIsMultipleOfQuarterPoints(total string) int {
-	prx := regexp.MustCompile(pricePattern)
-
-	if !prx.MatchString(total) {
+	if !prx.MatchString(total) { // prx compiled in `models.go`
 		panic(fmt.Errorf("mustIsMultipleOfQuarterPoints requires a value formatted as money"))
 	}
 
@@ -61,9 +54,7 @@ func numItemsPoints(is []item) int {
 }
 
 func mustTrimmedLengthMultOfThreePoints(itemDescription, price string) int {
-	prx := regexp.MustCompile(pricePattern)
-
-	if !prx.MatchString(price) {
+	if !prx.MatchString(price) { // prx compiled in `models.go`
 		panic(fmt.Errorf("mustTrimmedLengthMultOfThreePoints requires a value formatted as money"))
 	}
 

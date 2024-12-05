@@ -9,6 +9,22 @@ import (
 	"github.com/bkohler93/receipt-processor-challenge/db"
 )
 
+const (
+	retailerPattern         = `^[\w\s\-&]+$`
+	purchaseDateFormat      = `2006-01-02`
+	purchaseTimeFormat      = `15:04`
+	totalPattern            = `^\d+\.\d{2}$`
+	shortDescriptionPattern = `^[\w\s\-]+$`
+	pricePattern            = `^\d+\.\d{2}$`
+)
+
+var (
+	rPrx = regexp.MustCompile(retailerPattern)
+	trx  = regexp.MustCompile(totalPattern)
+	sDrx = regexp.MustCompile(shortDescriptionPattern)
+	prx  = regexp.MustCompile(pricePattern)
+)
+
 type receipt struct {
 	Retailer     string
 	PurchaseDate time.Time
@@ -41,12 +57,12 @@ func (rr receiptRequest) validateReceipt() (receipt, error) {
 	invalidFields := []string{}
 	isInvalid := false
 
-	retailerPattern := `^[\w\s\-&]+$`
-	purchaseDateFormat := `2006-01-02`
-	purchaseTimeFormat := `15:04`
-	totalPattern := `^\d+\.\d{2}$`
+	// retailerPattern := `^[\w\s\-&]+$`
+	// purchaseDateFormat := `2006-01-02`
+	// purchaseTimeFormat := `15:04`
+	// totalPattern := `^\d+\.\d{2}$`
 
-	rPrx := regexp.MustCompile(retailerPattern)
+	// rPrx := regexp.MustCompile(retailerPattern)
 	if !rPrx.MatchString(rr.Retailer) {
 		invalidFields = append(invalidFields, "retailer")
 		isInvalid = true
@@ -64,7 +80,7 @@ func (rr receiptRequest) validateReceipt() (receipt, error) {
 		isInvalid = true
 	}
 
-	trx := regexp.MustCompile(totalPattern)
+	// trx := regexp.MustCompile(totalPattern)
 	if !trx.MatchString(rr.Total) {
 		invalidFields = append(invalidFields, "total")
 		isInvalid = true
@@ -98,16 +114,16 @@ func (ir itemRequest) toItem(itemNum int) (item, error) {
 	invalidFields := []string{}
 	isInvalid := false
 
-	shortDescriptionPattern := `^[\w\s\-]+$`
-	pricePattern := `^\d+\.\d{2}$`
+	// shortDescriptionPattern := `^[\w\s\-]+$`
+	// pricePattern := `^\d+\.\d{2}$`
 
-	sDrx := regexp.MustCompile(shortDescriptionPattern)
+	// sDrx := regexp.MustCompile(shortDescriptionPattern)
 	if !sDrx.MatchString(ir.ShortDescription) {
 		invalidFields = append(invalidFields, "shortDescription")
 		isInvalid = true
 	}
 
-	prx := regexp.MustCompile(pricePattern)
+	// prx := regexp.MustCompile(pricePattern)
 	if !prx.MatchString(ir.Price) {
 		invalidFields = append(invalidFields, "price")
 		isInvalid = true
