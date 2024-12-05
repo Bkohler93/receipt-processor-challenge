@@ -89,7 +89,7 @@ func timeBetweenTwoAndFourPoints(t time.Time) int {
 	hour := t.Hour()
 	min := t.Minute()
 
-	if (hour == 14 && min > 0) || (hour > 14 && hour < 16) {
+	if (hour == 14 && min > 0) || hour == 15 {
 		return 10
 	}
 	return 0
